@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+aside {
+    box-shadow: 1px 0 3px #ccc;
+    min-width: 300px;
+    overflow: auto;
+    padding-right: 15px;
+    width: 20%;
+    z-index: 1;
+}
+
+aside .content-logo {
+    padding: 20px;
+}
+
+aside .content-logo img {
+    max-width: 150px;
+    width: 100%;
+}
+
+main {
+    overflow: auto;
+    padding: 15px;
+    width: 80%;
+    z-index: 0;
+}
