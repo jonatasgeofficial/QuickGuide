@@ -1,29 +1,32 @@
-/* MANAGER*/
-app
+/* GUIDE - COMPONENTS */
+guide
     // COMPONENTS
-    .set('start', 'components', function () {
-        app.browse('components', app.tryLink, 'components');
+    .set('start.components', function () {
+        guide.browse('components', guide.tryLink, {
+            trim: true,
+            where: 'components'
+        });
     }).run('start')
     // MENU
-    .set('build', 'menu', function () {
-        app
-            .build('aside', 'html', app.get('components', 'menu'))
-            .browse('topics', app.tryLink, 'topics');
+    .set('build.menu', function () {
+        guide
+            .build(guide.get('config', 'ref'), 'html', guide.get('components', 'menu'))
+            .browse('topics', guide.tryLink, 'topics');
 
-        var item = app.get('component', 'menuitem');
+        var item = guide.get('component', 'menuitem');
     });
 
-// app.get('components/menu/menu.html', function (menu) {}
+// guide.get('components/menu/menu.html', function (menu) {}
 
 
-//     app.get('components/menu/menu.html', function (menu) {
-//         app
+//     guide.get('components/menu/menu.html', function (menu) {
+//         guide
 //             .build('aside', 'html', menu)
 //             .get('components/menu/menuitem.html', function (menuitem) {
 //                 function renderMenuCategory(where, name, url) {
-//                     if (!app.getComponent('collapsible'))
-//                         app.get('components/collapsible/collapsible.html', function (collapsible) {
-//                             app.manager('componet', 'collapsible', collapsible);
+//                     if (!guide.getComponent('collapsible'))
+//                         guide.get('components/collapsible/collapsible.html', function (collapsible) {
+//                             guide.manager('componet', 'collapsible', collapsible);
 //                             renderMenuCategory(name, url);
 //                         })
 
@@ -33,7 +36,7 @@ app
 //                         .attr('href', '?page=' + url)
 //                         .text(name);
 
-//                     app.build(where, 'html', item);
+//                     guide.build(where, 'html', item);
 //                 }
 
 //                 function renderMenuItem(where, name, url) {
@@ -43,7 +46,7 @@ app
 //                         .attr('href', '#/' + url)
 //                         .text(name);
 
-//                     app.build(where, 'html', item);
+//                     guide.build(where, 'html', item);
 //                 }
 
 //                 function renderMenu(where, what) {
@@ -63,13 +66,13 @@ app
 //                                 link
 //                             );
 //                         } else {
-//                             var id = 'menuCategory' + app.randomInt(1, 1000000);
+//                             var id = 'menuCategory' + guide.randomInt(1, 1000000);
 
 //                         }
 //                     }
 //                 }
 
-//                 app.get('topics', function (r) {
+//                 guide.get('topics', function (r) {
 //                     renderMenu('#menu', r);
 //                 });
 //             })
