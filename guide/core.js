@@ -5,9 +5,8 @@ var guide = {
         if (callback) callback();
         return guide;
     },
-    get: function (why, callback) {
-        debugger
-        var result = guide.roam(guide.main, why, 'get');
+    get: function (way, callback) {
+        var result = guide.roam(guide.main, way);
 
         if (callback) {
             callback(result);
@@ -41,21 +40,22 @@ var guide = {
     },
     roam: function (where, way, what, callback) {
         var result = where;
-        if (way.indexOf('.') !== -1) {
-            var way = way.split('.');
-            if (what) {
-                for (var key in way) {
-                    if (result[way[key]] === undefined) result[way[key]] = {};
-                    if (key >= way.length -1) result[way[key]] = what;
-                    result = result[way[key]];
-                }
+
+        var way = way.split('.');
+        if (what) {
+            for (var i in way) {
+                if (result[way[i]] === undefined) result[way[i]] = {};
+                if (i >= way.length - 1) result[way[i]] = what;
+                result = result[way[i]];
             }
-            else
-                for (var key in way) {
-                    if (result[way[key]]) result = result[way[key]];
-                    else break;
-                }
-        } else result = result[way];
+        } else
+            for (var i in way) {
+                if (result[way[i]] !== undefined) result = result[way[i]];
+                else {
+                    result = undefined;
+                    break;
+                };
+            }
 
         if (callback) {
             callback(result);
@@ -70,7 +70,6 @@ var guide = {
         return guide;
     },
     set: function (why, what, callback) {
-        debugger
         guide.roam(guide.main, why, what);
         if (callback) callback();
         return guide;

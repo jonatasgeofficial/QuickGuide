@@ -18,7 +18,7 @@ guide.tryLink = function (link, data) {
 
     if (split[split.length - 1] === '') guide.browse(url, guide.tryLink, data);
     else {
-        var name = '.' + split[split.length - 1].replace(guide.get('config', 'fileExtension'), '');
+        var name = '.' + split[split.length - 1].replace(guide.get('config.fileExtension'), '');
         guide.request(url, function (result) {
             if (data.trim) result = result.replace(/  /g, '');
             guide.set(where + name, result);

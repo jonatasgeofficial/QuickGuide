@@ -10,10 +10,33 @@ guide
     // MENU
     .set('build.menu', function () {
         guide
-            .build(guide.get('config', 'ref'), 'html', guide.get('components', 'menu'))
-            .browse('topics', guide.tryLink, 'topics');
+            .build(guide.get('config.ref.menu'), 'html', guide.get('components.menu'))
+            .browse('topics', guide.tryLink, {
+                trim: true,
+                where: 'topics'
+            });
 
-        var item = guide.get('component', 'menuitem');
+        var item = $(guide.get('components.menuitem'));
+
+        var interval = setInterval(function () {
+            var topics = guide.get('topics');
+            if (topics) {
+                clearInterval(interval);
+                
+                for (var key in topics) {
+                    var link = item.clone();
+
+                    link
+                        .find('.print-here')
+                        .attr('href', '#/topics/' + key)
+                        .removeClass('.print-here')
+                        .text(decodeURI(key));
+
+                    guide
+                        .build(guide.get('config.ref.menuitems'), 'append', link)
+                }
+            }
+        }, 50);
     });
 
 // guide.get('components/menu/menu.html', function (menu) {}
